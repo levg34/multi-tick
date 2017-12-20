@@ -14,11 +14,28 @@ function compareTarget(a,b) {
 
 app.controller('aCtrl', function($scope,$interval) {
 	$scope.targetList = []
-	$scope.fillList = function() {
-		$scope.targetList.push({title:'Babar matin',color:'success',image:'car.png',date: moment().startOf('day').add(11,'hours').add(27,'minutes')})
-		$scope.targetList.push({title:'Babar après-midi',color:'success',image:'tram-wait.jpg',date: moment().startOf('day').add(16,'hours').add(27,'minutes')})
-		$scope.targetList.push({title:'Babar test',color:'success',image:'tram-climb.jpg',date: moment().startOf('day').add(14,'hours').add(40,'minutes')})
+	$scope.createTarget = function (title,hours,minutes,locomotion) {
+		var res = {
+				title:title,
+				color:'success',
+				date: moment().startOf('day').add(hours,'hours').add(minutes,'minutes')
+			}
+		
+		if (locomotion == 'tramway') {
+			res.image = 'tram-wait.jpg'
+		} else if (locomotion == 'tram') {
+			res.image = 'tram-climb.jpg'
+		} else {
+			res.image = 'car.png'
+		}
+		
+		$scope.targetList.push(res)
 		$scope.targetList.sort(compareTarget)
+	}
+	$scope.fillList = function() {
+		$scope.createTarget('Babar matin',11,27,'car')
+		$scope.createTarget('Babar après-midi',16,27,'tramway')
+		$scope.createTarget('Test',15,15,'tram')
 	}
 	$scope.countdown = function(target) {
 		var today = moment().startOf('day')
