@@ -14,6 +14,7 @@ function compareTarget(a,b) {
 
 app.controller('aCtrl', function($scope,$interval) {
 	$scope.targetList = []
+	$scope.time = new Date()
 	$scope.createTarget = function (title,hours,minutes,locomotion) {
 		var res = {
 				title:title,
@@ -54,6 +55,7 @@ app.controller('aCtrl', function($scope,$interval) {
 		$scope.targetList.forEach(function(target) {
 			$scope.countdown(target)
 		})
+		$scope.time = new Date()
 	}
 	$scope.remove = function(target) {
 		var index = $scope.targetList.map(function(e) {
