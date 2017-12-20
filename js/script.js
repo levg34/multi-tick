@@ -68,7 +68,6 @@ app.controller('aCtrl', function($scope,$interval) {
 			return e.title != target.title
 		})
 	}
-	$scope.fillList()
 	$scope.refresh()
 	$interval($scope.refresh, 500)
 })
